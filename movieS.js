@@ -51,11 +51,25 @@ function dispCont(response) {
 
     let ratings = document.createElement('p');
     ratings.innerText = response.Ratings[0].Value;
-        
-    let title = document.createElement('h2')
-    title.innerText = response.Title;
 
-    div.append(title,disc,year,director, ratings)
+    var imdb = Number(response.Ratings[0].Value.slice(0, 3))
+    console.log(imdb)
+     
+    if (imdb > 8.5) {
+        let div2 = document.createElement('div')
+        
+        
+        div2.innerHTML = ` <i class="fas fa-check-circle"></i> <p id = 'recom'> Recommended </p> <h2> ${response.Title}</h2>`
+
+        div.append(div2, disc, year, director, ratings)
+    }
+    else {
+
+        let title = document.createElement('h2')
+        title.innerText = response.Title;
+        div.append(title, disc, year, director, ratings)
+
+    }
 
     cont.append(image,div)
 }
