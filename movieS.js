@@ -3,11 +3,21 @@ var movie;
 
 
 async function fetching() {
-    let res = await fetch(`http://www.omdbapi.com/?apikey=11beb49c&t=${movie}`);
-    var response = await res.json();
 
-    console.log(response)
-    dispCont(response);
+    try {
+        let res = await fetch(`http://www.omdbapi.com/?apikey=11beb49c&t=${movie}`);
+        var response = await res.json();
+
+        console.log(response)
+        dispCont(response);
+    }
+    catch (e) {
+        console.log(e);
+        console.log('eoorooeo')
+        cont.innerHTML = `  <div style="width:100%;height:0;padding-bottom:100%;position:relative;"><iframe src="https://giphy.com/embed/aYpmlCXgX9dc09dbpl" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
+                 <p id = 'oopss'> OOPS! Search not found </p > `
+        
+    }
 }
 
 
@@ -22,7 +32,7 @@ function searchM() {
 
 function dispCont(response) {
 
-    cont.innerText = null;
+    cont.innerHTML = null;
     
     cont.classList.add('border')
     let image = document.createElement('img');
